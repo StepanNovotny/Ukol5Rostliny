@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class SaveLoadPlantListManager {
     private List<Plant> plantList;
-    private List<List<Plant>> listOfPlantList;
 
     public List<Plant> loadFromFile(String filename) throws PlantException {
         try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(filename)))) {
@@ -27,38 +26,40 @@ public class SaveLoadPlantListManager {
         String[] parameterArray = line.split("\t");
         if(parameterArray.length==5){
 
-            Plant loadedPlant = new Plant(parameterArray[0],parameterArray[1], LocalDate.parse(parameterArray[2]),LocalDate.parse(parameterArray[3]),Integer.parseInt(parameterArray[4]));
+            Plant loadedPlant = new Plant(parameterArray[0],parameterArray[1], LocalDate.parse(parameterArray[4]),LocalDate.parse(parameterArray[3]),Integer.parseInt(parameterArray[2]));
             return loadedPlant;
         }else {
             throw new PlantException("Linka v souboru má špatný počet parametrů");
         }
     }
 
-    public void saveToFile(String filename,List<List<Plant>> listOfPlantList,int plantListIndex) throws PlantException {
+    public void saveToFile(String filename,List<Plant> listOfPlant) throws PlantException {
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(filename)))) {
-            for (Plant plant : listOfPlantList.get(plantListIndex)) {
+            for (Plant plant : listOfPlant) {
                 writer.println(plant.getName()+"\t"+plant.getNotes()+"\t"+plant.getFrequencyOfWattering()+"\t"+plant.getLastWattered()+"\t"+plant.getPlanted());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-    public List<List<Plant>> addPlantToAList(List<List<Plant>> listOfPlantList,int indexOfList,Plant...plants){
+    public void updatePlantList(String filname,Plant...newPlants) throws PlantException {
+        List<Plant> plantList = loadFromFile(filname);
+        plantList = addPlantToAList(plantList,newPlants);
+        saveToFile(filname,plantList);
+    }
+    public List<Plant> addPlantToAList(List<Plant> listOfPlants,Plant...plants){
         for (Plant plant:plants) {
-            listOfPlantList.get(indexOfList).add(plant);
+            listOfPlants.add(plant);
         }
-        return listOfPlantList;
+        return listOfPlants;
     }
 
-    public List<List<Plant>> createListOfPlants(Plant...plants){
+    public List<Plant> createListOfPlants(Plant...plants){
         plantList = new ArrayList<>();
         for (Plant plant:plants) {
             plantList.add(plant);
         }
-        listOfPlantList = new ArrayList<>();
-        listOfPlantList.add(plantList);
-        return listOfPlantList;
+        return plantList;
     }
 
     public Plant createPlant(String...parameters) throws PlantException {

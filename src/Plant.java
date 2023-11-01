@@ -7,7 +7,10 @@ public class Plant {
     private LocalDate lastWattered;
     private int frequencyOfWattering;
 
-    public Plant(String name, String notes, LocalDate planted, LocalDate lastWattered, int frequencyOfWattering) {
+    public Plant(String name, String notes, LocalDate planted, LocalDate lastWattered, int frequencyOfWattering) throws PlantException {
+//        if(lastWattered.isBefore(getPlanted())){
+//            throw new PlantException("Chyba data: Květina nemohla být naposledy zalita před zasazením.");
+//        }
         this.name = name;
         this.notes = notes;
         this.planted = planted;
@@ -15,7 +18,10 @@ public class Plant {
         this.frequencyOfWattering = frequencyOfWattering;
     }
 
-    public Plant(String name, LocalDate planted, int frequencyOfWattering) {
+    public Plant(String name, LocalDate planted, int frequencyOfWattering) throws PlantException {
+//        if(planted.isAfter(getLastWattered())){
+//            throw new PlantException("Chyba data: Květina nemohla být zasazena po posledním zalití.");
+//        }
         this.name = name;
         this.notes = "";
         this.planted = planted;
@@ -78,6 +84,11 @@ public class Plant {
             throw new PlantException("Frekvence zalévání nesmí být menší nebo rovna nule");
         }
         this.frequencyOfWattering = frequencyOfWattering;
+    }
+
+    @Override
+    public String toString() {
+        return  "\n" + name + "\t" + notes + "\t" + frequencyOfWattering +"\t"+ lastWattered+ "\t" + planted;
     }
 
     public String getWatteringInfo(){
