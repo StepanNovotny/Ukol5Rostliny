@@ -8,25 +8,25 @@ public class Plant {
     private int frequencyOfWattering;
 
     public Plant(String name, String notes, LocalDate planted, LocalDate lastWattered, int frequencyOfWattering) throws PlantException {
-//        if(lastWattered.isBefore(getPlanted())){
-//            throw new PlantException("Chyba data: Květina nemohla být naposledy zalita před zasazením.");
-//        }
         this.name = name;
         this.notes = notes;
         this.planted = planted;
         this.lastWattered = lastWattered;
         this.frequencyOfWattering = frequencyOfWattering;
+        if(lastWattered.isBefore(getPlanted())){
+            throw new PlantException("Chyba data: Květina nemohla být naposledy zalita před zasazením.");
+        }
     }
 
     public Plant(String name, LocalDate planted, int frequencyOfWattering) throws PlantException {
-//        if(planted.isAfter(getLastWattered())){
-//            throw new PlantException("Chyba data: Květina nemohla být zasazena po posledním zalití.");
-//        }
         this.name = name;
         this.notes = "";
         this.planted = planted;
         this.lastWattered = LocalDate.now();
         this.frequencyOfWattering = frequencyOfWattering;
+        if(planted.isAfter(getLastWattered())){
+            throw new PlantException("Chyba data: Květina nemohla být zasazena po posledním zalití.");
+        }
     }
 
     public Plant(String name) {

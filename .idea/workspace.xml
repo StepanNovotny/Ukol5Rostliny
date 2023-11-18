@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0ec12ca7-b7a0-4e13-bcd2-88121bb34eaf" name="Changes" comment="ukol5" />
+    <list default="true" id="0ec12ca7-b7a0-4e13-bcd2-88121bb34eaf" name="Changes" comment="ukol5 přidání metod">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Plant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Plant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SaveLoadPlantListManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SaveLoadPlantListManager.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,7 +59,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698708217553</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ukol5 přidání metod">
+      <created>1698869017888</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698869017888</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -71,6 +82,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ukol5" />
-    <option name="LAST_COMMIT_MESSAGE" value="ukol5" />
+    <MESSAGE value="ukol5 přidání metod" />
+    <option name="LAST_COMMIT_MESSAGE" value="ukol5 přidání metod" />
   </component>
 </project>

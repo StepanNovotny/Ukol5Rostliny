@@ -1,6 +1,7 @@
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,9 +25,28 @@ public class SaveLoadPlantListManager {
     public Plant parseLine(String line) throws PlantException {
 
         String[] parameterArray = line.split("\t");
+        LocalDate wrongDate;
+        Integer wrongNumber;
+        try{
+            wrongDate = LocalDate.parse(parameterArray[4]);
+        }catch(DateTimeParseException wrongPlanted){
+            throw new PlantException("Chybně zadané datum zasazení: " + wrongPlanted);
+        }
+        try{
+            wrongDate = LocalDate.parse(parameterArray[3]);
+        }catch(DateTimeParseException wrongPlanted){
+            throw new PlantException("Chybně zadané datum posledního zalití: " + wrongPlanted);
+        }
+        try{
+            wrongNumber = Integer.parseInt(parameterArray[2]);
+        }catch(NumberFormatException wrongWateringFrequency){
+            throw new PlantException("Chybně zadané datum posledního zalití: " + wrongWateringFrequency);
+        }
+
         if(parameterArray.length==5){
 
-            Plant loadedPlant = new Plant(parameterArray[0],parameterArray[1], LocalDate.parse(parameterArray[4]),LocalDate.parse(parameterArray[3]),Integer.parseInt(parameterArray[2]));
+
+            Plant loadedPlant = new Plant(parameterArray[0], parameterArray[1], LocalDate.parse(parameterArray[4]), LocalDate.parse(parameterArray[3]), Integer.parseInt(parameterArray[2]));
             return loadedPlant;
         }else {
             throw new PlantException("Linka v souboru má špatný počet parametrů");
